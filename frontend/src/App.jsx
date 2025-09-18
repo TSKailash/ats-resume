@@ -1,16 +1,17 @@
-import React from 'react'
-import Navbar from './components/Navbar';
+import { BrowserRouter,Routes,Route } from "react-router-dom"
+import GeneralHome from "./components/GeneralHome"
+import Login from "./components/Login"
+import Register from "./components/Register"
 
 const App = () => {
-  const handleHandle=()=>{
-    console.log("Handle")
-  }
-  console.log(name);
   return (
-    <div>
-      <Navbar func={handleHandle}/>
-      
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<GeneralHome/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

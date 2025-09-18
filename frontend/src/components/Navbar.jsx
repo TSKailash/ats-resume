@@ -1,12 +1,10 @@
 import React from 'react'
 
-const Navbar = (prop) => {
+const Navbar = () => {
 
-    const fun = prop.func;
   return (
-    <div>
-      <h1 className='bg-amber-950'>"Hello"</h1>
-      <button onClick={fun}>click</button>
+    <div className='bg-purple-400 h-16 w-full'>
+      <h1>Hello user</h1>
     </div>
   )
 }
