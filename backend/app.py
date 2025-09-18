@@ -2,6 +2,7 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from routes.authRoutes import auth_bp
+from routes.adminRoutes import admin_bp
 from flask_pymongo import PyMongo
 from extensions import mongo, jwt
 from dotenv import load_dotenv
@@ -20,6 +21,7 @@ def create_app():
     jwt.init_app(app)
 
     app.register_blueprint(auth_bp, url_prefix="/auth")
+    app.register_blueprint(admin_bp, url_prefix="/admin")
     return app
 
 if __name__=="__main__":

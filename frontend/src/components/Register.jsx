@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Register = () => {
-  const [role, setRole] = useState("normaluser");
+  const [role, setRole] = useState("user");
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,37 +12,39 @@ const Register = () => {
   const [cinno, setCinno] = useState("");
 
 const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const userData = {
-      role,
-      name,
-      email,
-      password,
-      cpassword,
-      phno,
-      companyname,
-      cinno,
-    };
-
-    try {
-      const response = await fetch("http://127.0.0.1:5000/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        alert("✅ " + data.message);
-      } else {
-        alert("❌ " + data.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("❌ Something went wrong!");
-    }
+  const userData = {
+    role,
+    username: name,                
+    email,
+    password,
+    confirm_password: cpassword,   
+    p_no: phno,                    
+    company_name: companyname,     
+    cin_number: cinno,             
   };
+
+  console.log(userData)
+
+  try {
+    const response = await fetch("http://127.0.0.1:5000/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert("✅ " + data.msg);   
+    } else {
+      alert("❌ " + data.msg);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("❌ Something went wrong!");
+  }
+};
 
   return (
     <div style={{ padding: "20px" }}>
@@ -107,8 +109,8 @@ const handleSubmit = async (e) => {
           type="radio"
           name="role"
           id="normaluser"
-          value="normaluser"
-          checked={role === "normaluser"}
+          value="user"
+          checked={role === "user"}
           onChange={(e) => setRole(e.target.value)}
         />
         <label htmlFor="normaluser">Searching for Job</label>
@@ -117,14 +119,14 @@ const handleSubmit = async (e) => {
           type="radio"
           name="role"
           id="recruiter"
-          value="recruiter"
-          checked={role === "recruiter"}
+          value="hr"
+          checked={role === "hr"}
           onChange={(e) => setRole(e.target.value)}
         />
         <label htmlFor="recruiter">Recruiter</label>
         <br />
 
-        {role === "recruiter" && (
+        {role === "hr" && (
           <div>
             <label htmlFor="companyname">Enter your Company Name </label>
             <input
