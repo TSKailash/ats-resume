@@ -56,3 +56,4 @@ def update_hr_profile():
     })
 
     return jsonify({"msg": "Profile updated successfully"}), 200
+

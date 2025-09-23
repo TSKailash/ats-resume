@@ -4,6 +4,7 @@ from flask_cors import CORS
 from routes.authRoutes import auth_bp
 from routes.adminRoutes import admin_bp
 from routes.hrRoutes import hr_bp
+from routes.jobRoutes import job_bp
 from flask_pymongo import PyMongo
 from extensions import mongo, jwt
 from dotenv import load_dotenv
@@ -24,9 +25,10 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(admin_bp, url_prefix="/admin")
     app.register_blueprint(hr_bp, url_prefix="/hr")
+    app.register_blueprint(job_bp, url_prefix="/job")
 
     return app
 
 if __name__=="__main__":
     app=create_app()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
